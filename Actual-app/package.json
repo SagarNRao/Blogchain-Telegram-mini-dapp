@@ -4,7 +4,7 @@
     "app:build": "cd app && npm run build",
     "program:build": "anchor build",
     "program:deploy": "anchor deploy && node copy_idl.js",
-    "dev": "node yourScript.js"
+    "dev": "node App.jsx"
   },
   "dependencies": {
     "@metamask/sdk-react": "^0.26.1",

@@ -1,20 +1,27 @@
 import { useMemo } from "react";
 import { BlogProvider } from "src/context/Blog";
 import { Router } from "src/router";
-import { MetaMaskProvider } from "@metamask/sdk-react";
 import { ConnectionProvider, WalletProvider,} from "@solana/wallet-adapter-react";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import "./App.css";
 
 export const App = () => {
 
-  const endpoint = ""
+  const endpoint = "https://solana-devnet.g.alchemy.com/v2/4BPXzjEPQTQgjqT3yhHr2cXVnRLEzMWT";
+  const wallets = useMemo(
+    () => [
+      new PhantomWalletAdapter(),
+    ],
+    []
+  );
 
-  <ConnectionProvider endpoint={}>
-    <WalletProvider>
-      <BlogProvider>
-        <Router />
-      </BlogProvider>
-    </WalletProvider>
-  </ConnectionProvider>;
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <BlogProvider>
+          <Router />
+        </BlogProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
 };

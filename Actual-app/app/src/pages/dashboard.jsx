@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom'
 export const Dashboard = () => {
   const history = useHistory()
   const [connecting, setConnecting] = useState(false)
-  const { select } = useWallet()
+  const { connected, select } = useWallet()
   const [postTitle, setPostTitle] = useState("")
   const [postContent, setPostContent] = useState("")
 
@@ -22,11 +22,11 @@ export const Dashboard = () => {
     name: "Random Robot",
     avatar: "https://avatarfiles.alphacoders.com/283/thumb-283778.jpg",
   }
-  const connected = false
+  // const connected = false
   const posts = []
 
   const createPost = () => {
-
+    
   }
 
   const showModal = false
