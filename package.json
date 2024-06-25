@@ -9,6 +9,9 @@
   "author": "SagarNRao <sagarnrao154@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@remix-project/remixd": "^0.6.33"
+    "@remix-project/remixd": "^0.6.33",
+    "next": "^14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

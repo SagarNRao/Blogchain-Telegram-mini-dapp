@@ -1,0 +1,119 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "accountData",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "status",
+						"type": "string"
+					},
+					{
+						"internalType": "uint64",
+						"name": "valscore",
+						"type": "uint64"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "walletSeed",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					}
+				],
+				"name": "create_post",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "walletSeed",
+						"type": "address"
+					}
+				],
+				"name": "expert_ascension",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "walletSeed",
+						"type": "address"
+					}
+				],
+				"name": "newAccount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"blogchain-june24/contracts/contract-man.sol": "Validity"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"blogchain-june24/contracts/contract-man.sol": {
+			"keccak256": "0x2b3f01f3c41a3d7cad3cde51c09d2bc20de0aa1a2b25e72c52fdd8b5d01bc8a6",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://b5b1f4ab94fbf98400e8ff510186411562c235d0d8109cab9bd0240ffcbfa018",
+				"dweb:/ipfs/QmY2sEdvfZ1zVUC2pAPhRERmPM9WRKxW2pgqn8qvfc3aif"
+			]
+		}
+	},
+	"version": 1
+}
