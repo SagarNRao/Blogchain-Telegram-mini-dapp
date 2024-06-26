@@ -1,17 +1,5 @@
 {
-  "name": "blogchain-new",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/SagarNRao/Blogchain-Telegram-mini-dapp.git",
-  "scripts": {
-    "remixd": "node c:/Projects/Web/Blogchain-telegram-mini-dapp/node_modules/@remix-project/remixd/src/bin/remixd.js"
-  },
-  "author": "SagarNRao <sagarnrao154@gmail.com>",
-  "license": "MIT",
   "dependencies": {
-    "@remix-project/remixd": "^0.6.33",
-    "next": "^14.2.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@radix-ui/react-popover": "^1.1.1"
   }
 }

@@ -9,24 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@metamask/sdk-react": "^0.26.3",
     "@remix-project/remixd": "^0.6.33",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.1",
+    "lucide-react": "^0.397.0",
     "next": "14.1.0",
     "next-env": "^1.1.1",
     "react": "^18.3",
     "react-dom": "^18.3",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
     "thirdweb": "^5"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "hardhat": "^2.22.5",
     "postcss": "^8",
+    "solidity-coverage": "0.8.1",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "typechain": "8.3.0",
     "typescript": "^5"
   }
 }
