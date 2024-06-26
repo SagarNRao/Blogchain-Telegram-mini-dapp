@@ -4,23 +4,3 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-// Add this function to your utils.ts file
-
-/**
- * Formats a blockchain address for display.
- * @param address The address to format.
- * @returns A formatted address.
- */
-export const formatBalance = (rawBalance: string) => {
-  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(2);
-  return balance;
-};
-
-export const formatChainAsNum = (chainIdHex: string) => {
-  const chainIdNum = parseInt(chainIdHex);
-  return chainIdNum;
-};
-
-export const formatAddress = (addr: string | undefined) => {
-  return `${addr?.substring(0, 8)}...`;
-};

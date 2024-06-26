@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@metamask/sdk-react": "^0.26.3",
+    "@radix-ui/react-slot": "^1.1.0",
     "@remix-project/remixd": "^0.6.33",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
