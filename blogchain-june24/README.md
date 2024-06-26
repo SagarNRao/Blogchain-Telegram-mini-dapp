@@ -1,59 +1,47 @@
+## Getting Started
 
-![tw-banner](https://github.com/thirdweb-example/next-starter/assets/57885104/20c8ce3b-4e55-4f10-ae03-2fe4743a5ee8)
-
-# thirdweb-next-starter
-
-Starter template to build an onchain react native app with [thirdweb](https://thirdweb.com/) and [next](https://nextjs.org/).
-
-## Installation
-
-Install the template using [thirdweb create](https://portal.thirdweb.com/cli/create)
+Create a project using this example:
 
 ```bash
-  npx thirdweb create app --next
+npx thirdweb create --contract --template hardhat-javascript-starter
 ```
 
-## Environment Variables
+You can start editing the page by modifying `contracts/Contract.sol`.
 
-To run this project, you will need to add the following environment variables to your .env file:
+To add functionality to your contracts, you can use the `@thirdweb-dev/contracts` package which provides base contracts and extensions to inherit. The package is already installed with this project. Head to our [Contracts Extensions Docs](https://portal.thirdweb.com/contractkit) to learn more.
 
-`CLIENT_ID`
+## Building the project
 
-To learn how to create a client ID, refer to the [client documentation](https://portal.thirdweb.com/typescript/v5/client). 
-
-## Run locally
-
-Install dependencies
+After any changes to the contract, run:
 
 ```bash
-yarn
-```
-
-Start development server
-
-```bash
-yarn dev
-```
-
-Create a production build
-
-```bash
+npm run build
+# or
 yarn build
 ```
 
-Preview the production build
+to compile your contracts. This will also detect the [Contracts Extensions Docs](https://portal.thirdweb.com/contractkit) detected on your contract.
+
+## Deploying Contracts
+
+When you're ready to deploy your contracts, just run one of the following command to deploy you're contracts:
 
 ```bash
-yarn start
+npm run deploy
+# or
+yarn deploy
 ```
 
-## Resources
+## Releasing Contracts
 
-- [Documentation](https://portal.thirdweb.com/typescript/v5)
-- [Templates](https://thirdweb.com/templates)
-- [YouTube](https://www.youtube.com/c/thirdweb)
-- [Blog](https://blog.thirdweb.com)
+If you want to release a version of your contracts publicly, you can use one of the followings command:
 
-## Need help?
+```bash
+npm run release
+# or
+yarn release
+```
 
-For help or feedback, please [visit our support site](https://thirdweb.com/support)
+## Join our Discord!
+
+For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
