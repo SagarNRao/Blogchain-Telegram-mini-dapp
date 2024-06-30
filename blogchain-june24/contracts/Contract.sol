@@ -1,40 +1,62 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.19;
+// SPDX-License-Identifier: GPL-3.0
 
-contract Validity {
-    address private owner;
+pragma solidity 0.8.19;
+/**
+ * @title Validity Contract
+ * @dev Store & retrieve value in a variable
+ */
+contract ValidityContract {
 
-    struct AccountData {
-        string status; // Creator or Expert
-        uint64 valscore;
+    event Addpost(address recipient, uint postId);
+    event Deletepost(uint postId, bool isDeleted);
+
+    struct post {
+        uint id;
+        address username;
+        string postText;
+        bool isDeleted;
     }
 
-    constructor() {
-        owner = msg.sender;
+    post[] private posts;
+
+    // Mapping of post id to the wallet address of the user
+    mapping(uint256 => address) postToOwner;
+
+    // Method to be called by our frontend when trying to add a new post
+    function addpost(string memory postText, bool isDeleted) external {
+        uint postId = posts.length;
+        posts.push(post(postId, msg.sender, postText, isDeleted));
+        postToOwner[postId] = msg.sender;
+        emit Addpost(msg.sender, postId);
     }
 
-    modifier only_owner() {
-        require(msg.sender == owner, "Unauthorized");
-        _;
-    }
-
-    mapping(address => AccountData) public accountData;
-
-    function newAccount(address walletSeed) public {
-        AccountData storage data = accountData[walletSeed]; // creates an instance of the AccountData struct
-        data.valscore = 0;
-        data.status = "Creator";
-    }
-
-    function expert_ascension(address walletSeed) public only_owner {
-        AccountData storage data = accountData[walletSeed];
-        data.valscore = 501; // Comment this out after testing
-        if (data.valscore > 500) {
-            data.status = "expert";
+    // Method to get all the posts
+    function getAllposts() external view returns (post[] memory) {
+        post[] memory temporary = new post[](posts.length);
+        uint counter = 0;
+        for(uint i=0; i<posts.length; i++) {
+            if(posts[i].isDeleted == false) {
+                temporary[counter] = posts[i];
+                counter++;
+            }
         }
+
+        post[] memory result = new post[](counter);
+        for(uint i=0; i<counter; i++) {
+            result[i] = temporary[i];
+        }
+        return result;
     }
 
-    function create_post(address walletSeed, string memory content) public {
+    // Method to get only your posts
+    
 
-    }
+    // Method to Delete a post
+    // function deletepost(uint postId, bool isDeleted) external {
+    //     if(postToOwner[postId] == msg.sender) {
+    //         posts[postId].isDeleted = isDeleted;
+    //         emit Deletepost(postId, isDeleted);
+    //     }
+    // }
+
 }
