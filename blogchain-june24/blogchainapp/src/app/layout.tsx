@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThirdwebProvider } from "thirdweb/react";
+import { Login } from "../../components/login";
+import ContractDataFetcher from "./feed";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
