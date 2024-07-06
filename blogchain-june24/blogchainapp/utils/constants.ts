@@ -6,103 +6,250 @@ export const client = createThirdwebClient({
 });
 
 export const chain = defineChain(11155111);
-const contractAddress = "0x9Cb6B628a7ed40A2d112A9720A5E504E316506F0";
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const abi = [
-  {
-    type: "event",
-    name: "Addpost",
-    inputs: [
       {
-        type: "address",
-        name: "recipient",
-        indexed: false,
-        internalType: "address",
-      },
-      {
-        type: "uint256",
-        name: "postId",
-        indexed: false,
-        internalType: "uint256",
-      },
-    ],
-    outputs: [],
-    anonymous: false,
-  },
-  {
-    type: "event",
-    name: "Deletepost",
-    inputs: [
-      {
-        type: "uint256",
-        name: "postId",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        type: "bool",
-        name: "isDeleted",
-        indexed: false,
-        internalType: "bool",
-      },
-    ],
-    outputs: [],
-    anonymous: false,
-  },
-  {
-    type: "function",
-    name: "addpost",
-    inputs: [
-      {
-        type: "string",
-        name: "postText",
-        internalType: "string",
-      },
-      {
-        type: "bool",
-        name: "isDeleted",
-        internalType: "bool",
-      },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "getAllposts",
-    inputs: [],
-    outputs: [
-      {
-        type: "tuple[]",
-        name: "",
-        components: [
+        "anonymous": false,
+        "inputs": [
           {
-            type: "uint256",
-            name: "id",
-            internalType: "uint256",
+            "indexed": false,
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
           },
           {
-            type: "address",
-            name: "username",
-            internalType: "address",
-          },
-          {
-            type: "string",
-            name: "postText",
-            internalType: "string",
-          },
-          {
-            type: "bool",
-            name: "isDeleted",
-            internalType: "bool",
-          },
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "postId",
+            "type": "uint256"
+          }
         ],
-        internalType: "struct ValidityContract.post[]",
+        "name": "Addpost",
+        "type": "event"
       },
-    ],
-    stateMutability: "view",
-  },
-] as const;
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "postId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isDeleted",
+            "type": "bool"
+          }
+        ],
+        "name": "Deletepost",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "postId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "approver",
+            "type": "address"
+          }
+        ],
+        "name": "PostApproved",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "postId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "liker",
+            "type": "address"
+          }
+        ],
+        "name": "PostLiked",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "postId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isVerified",
+            "type": "bool"
+          }
+        ],
+        "name": "Validatepost",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "postText",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "isDeleted",
+            "type": "bool"
+          }
+        ],
+        "name": "addpost",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "approvals",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_postId",
+            "type": "uint256"
+          }
+        ],
+        "name": "expertapprove",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getAllposts",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "username",
+                "type": "address"
+              },
+              {
+                "internalType": "string",
+                "name": "postText",
+                "type": "string"
+              },
+              {
+                "internalType": "bool",
+                "name": "isDeleted",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "isVerified",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "likes",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "approvals",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct MyValContract.post[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_postId",
+            "type": "uint256"
+          }
+        ],
+        "name": "likePost",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "likes",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_postId",
+            "type": "uint256"
+          }
+        ],
+        "name": "validatepost",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ]   as const;
 
 export const ValidityContract = getContract({
     client: client,

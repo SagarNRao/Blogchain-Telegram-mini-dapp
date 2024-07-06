@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { chain, client } from "../utils/constants";
-import { ConnectButton } from "thirdweb/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useActiveAccount } from "thirdweb/react";
 
 export const Login: React.FC = () => {
@@ -18,23 +18,11 @@ export const Login: React.FC = () => {
     >
       {account ? (
         <div style={{ textAlign: "center" }}>
-          <ConnectButton
-            client={client}
-            chain={chain}
-            connectModal={{
-              size: "compact",
-            }}
-          />
+          <ConnectButton />
         </div>
       ) : (
         <div style={{ textAlign: "center" }}>
-          <ConnectButton
-            client={client}
-            chain={chain}
-            connectModal={{
-              size: "compact",
-            }}
-          />
+          <ConnectButton />
         </div>
       )}
     </div>

@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const ContractDataFetcher = () => {
   const [data, setData] = useState<any[] | null>(null);
@@ -13,7 +14,7 @@ const ContractDataFetcher = () => {
       try {
         const sdk = new ThirdwebSDK("sepolia");
         const contract = await sdk.getContract(
-          "0x9Cb6B628a7ed40A2d112A9720A5E504E316506F0"
+          "0x5FbDB2315678afecb367f032d93F642f64180aa3"
         );
         const result = await contract.call("getAllposts");
         setData(result);
@@ -25,15 +26,15 @@ const ContractDataFetcher = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   const addresses: string[] = [];
-  const postsarr: string[] = [];
+  const postsarr: { content: string; isVerified: boolean }[] = [];
 
   if (data) {
     data.forEach((item) => {
       addresses.push(item[1]);
-      postsarr.push(item[2]);
+      postsarr.push({ content: item[2], isVerified: item[3] });
     });
   }
 
@@ -42,14 +43,18 @@ const ContractDataFetcher = () => {
 
   if (loading) return <p>Loading...</p>;
   if (!data) return <p>No data found</p>;
-  else {
-  }
 
   return (
-    <div>
+    <div id="re">
       {postsarr.map((post, index) => (
         <Card key={index}>
-          <CardTitle>{post}</CardTitle>
+          <CardTitle className="p-5 pb-1">post
+          {post.isVerified && <Badge>Verified</Badge>}
+          {!post.isVerified && <Badge>Not Verified</Badge>}
+          </CardTitle>
+          <CardContent className="p-5">
+            {post.content}
+          </CardContent>
         </Card>
       ))}
     </div>
