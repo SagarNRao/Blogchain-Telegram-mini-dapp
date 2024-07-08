@@ -11,6 +11,8 @@ async function main() {
   await myContract.deployed();
 
   console.log("MyContract deployed to:", myContract.address);
+  console.log("Deploy transaction hash:", myContract.deployTransaction.hash);
+
 }
 
 main()

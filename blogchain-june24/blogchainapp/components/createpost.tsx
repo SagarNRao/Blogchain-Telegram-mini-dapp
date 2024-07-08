@@ -1,12 +1,15 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ethers } from "ethers";
+import React, { useState, useEffect } from "react";
+import Web3 from "web3";
+import {ethers} from "ethers";
+interface NewPostFormProps {
+  web3: Web3;
+  account: string;
+  
+}
 
-const contractABI = {
+const MyValContract = {
   _format: "hh-sol-artifact-1",
   contractName: "MyValContract",
   sourceName: "contracts/Contract.sol",
@@ -266,71 +269,47 @@ const contractABI = {
   },
 };
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractABI = MyValContract.abi;
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
-const ContractDataFetcher = () => {
-  const [data, setData] = useState<any[] | null>(null);
-  const [loading, setLoading] = useState(true);
+const NewPostForm: React.FC<NewPostFormProps> = ({ web3, account }) => {
+  const [postText, setPostText] = useState<string>("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Initialize ethers provider
-        const provider = new ethers.providers.JsonRpcProvider(
-          "http://127.0.0.1:8545/"
-        );
-        const abiArray = contractABI.abi;
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const contract = new web3.eth.Contract(
+      MyValContract.abi,
+      MyValContract.networks[11155111].address
+    );
 
-        // Create a contract instance
-        const contract = new ethers.Contract(
-          contractAddress,
-          abiArray,
-          provider
-        );
+    try{
+      const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
 
-        try {
-          const result = await contract.getAllposts();
-          setData(result);
-        } catch (error) {
-          console.error(error);
-        }
-      } catch (error) {
-        console.error("Failed to fetch contract data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      const contract = new ethers.Contract(contractAddress, contractABI,provider.getSigner());
 
-    fetchData();
-  }, []);
+      const content = postText;
+      const tx = await contract.addpost(content, false);
 
-  const addresses: string[] = [];
-  const postsarr: { content: string; isVerified: boolean }[] = [];
-
-  if (data) {
-    data.forEach((item) => {
-      addresses.push(item[1]);
-      postsarr.push({ content: item[2], isVerified: item[3] });
-    });
-  }
-
-  if (loading) return <p>Loading...</p>;
-  if (!data) return <p>No data found</p>;
+    }
+    catch(error)
+    {
+      console.log("Failed to fetch", error);
+    }
+  };
 
   return (
-    <div id="re">
-      {postsarr.map((post, index) => (
-        <Card key={index}>
-          <CardTitle className="p-5 pb-1">
-            post
-            {post.isVerified && <Badge>Verified</Badge>}
-            {!post.isVerified && <Badge>Not Verified</Badge>}
-          </CardTitle>
-          <CardContent className="p-5">{post.content}</CardContent>
-        </Card>
-      ))}
+    <div>
+      <form onSubmit={handleSubmit}>
+      <textarea
+        value={postText}
+        onChange={(e) => setPostText(e.target.value)}
+        placeholder="Write your post"
+        required
+      />
+      <button type="submit">Submit Post</button>
+    </form>
     </div>
   );
 };
 
-export default ContractDataFetcher;
+export default NewPostForm;
