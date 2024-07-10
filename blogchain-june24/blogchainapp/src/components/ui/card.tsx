@@ -12,6 +12,9 @@ const Card = React.forwardRef<
       "rounded-lg border bg-card text-card-foreground shadow-sm",
       className
     )}
+    style={{
+      maxWidth:'600px'
+    }}
     {...props}
   />
 ));
@@ -51,6 +54,11 @@ const CardDescription = React.forwardRef<
   <p
     ref={ref}
     className={cn("text-sm text-muted-foreground", className)}
+    style={{
+      maxWidth: '600px',
+      whiteSpace: 'normal',
+      wordWrap:"break-word"
+    }}
     {...props}
   />
 ));

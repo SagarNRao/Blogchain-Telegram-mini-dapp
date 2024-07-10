@@ -29,6 +29,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { config } from "./wagmi";
 import MyValContract from "./../../../artifacts-zk/contracts/Contract.sol/MyValContract.json";
 
+interface Props {
+  postId: string;
+  address: string;
+  handleClick: (postId: string, address: string) => void;
+}
+
 const client = new QueryClient();
 
 export default function Home() {
@@ -71,7 +77,7 @@ export default function Home() {
             {isClient && <NewPostForm web3={new Web3()} account={""} />}
           </div>
           <div className="flex justify-center mb-20">
-            <ContractDataFetcher />
+            <ContractDataFetcher/>
           </div>
         </div>
       </main>

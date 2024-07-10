@@ -11,7 +11,7 @@ contract MyValContract {
     event Deletepost(uint postId, bool isDeleted);
 
     address public tokenaddress;
-    mapping(uint => uint) public rewards;
+    mapping(uint => uint) public postRewards;
 
     constructor() {
         tokenaddress = address(new MyTokenContract());
@@ -85,7 +85,6 @@ contract MyValContract {
 
     // Function to validate a post
     function validatepost(uint _postId) external {
-        // for testing
         require(!posts[_postId].isVerified, "post already verified");
 
         if (approvals[_postId] > 10) {
@@ -95,7 +94,7 @@ contract MyValContract {
             address posterAddress = postToOwner[_postId];
             uint tokenReward = 100; // adjust the reward amount as needed
             postRewards[_postId] = tokenReward;
-            MyTokenContract(tokenContractAddress).transfer(
+            MyTokenContract(tokenaddress).transfer(
                 posterAddress,
                 tokenReward
             );

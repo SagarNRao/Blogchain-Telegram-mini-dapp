@@ -269,7 +269,7 @@ const MyValContract = {
     "11155111": {
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       transactionHash:
-        "0xbba71ce765f4e89af90e4f1b9447086da42e8fe6e4ea33eb787b8a36584579bf"    },
+        "0x6ab2bb2afdbebc699ed96de5073682b79977721b8bdcd472602bfbcf660dc210"    },
   },
 };
 
