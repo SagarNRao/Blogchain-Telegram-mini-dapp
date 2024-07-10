@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import {ethers} from "ethers";
+
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+
 interface NewPostFormProps {
   web3: Web3;
   account: string;
@@ -300,13 +304,13 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ web3, account }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-      <textarea
+      <Textarea
         value={postText}
         onChange={(e) => setPostText(e.target.value)}
         placeholder="Write your post"
         required
       />
-      <button type="submit">Submit Post</button>
+      <Button type="submit">Submit Post</Button>
     </form>
     </div>
   );

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 
-pragma solidity 0.8.19;
+pragma solidity ^0.8.19;
+import "./MyTokenContract.sol";
 /**
  * @title MyValContract
  * @dev Store & retrieve value in a variable
@@ -8,6 +9,13 @@ pragma solidity 0.8.19;
 contract MyValContract {
     event Addpost(address recipient, uint postId);
     event Deletepost(uint postId, bool isDeleted);
+
+    address public tokenaddress;
+    mapping(uint => uint) public rewards;
+
+    constructor() {
+        tokenaddress = address(new MyTokenContract());
+    }
 
     struct post {
         uint id;
@@ -76,12 +84,21 @@ contract MyValContract {
     }
 
     // Function to validate a post
-    function validatepost(uint _postId) external { // for testing
+    function validatepost(uint _postId) external {
+        // for testing
         require(!posts[_postId].isVerified, "post already verified");
 
         if (approvals[_postId] > 10) {
             posts[_postId].isVerified = true;
             emit Validatepost(_postId, true);
+
+            address posterAddress = postToOwner[_postId];
+            uint tokenReward = 100; // adjust the reward amount as needed
+            postRewards[_postId] = tokenReward;
+            MyTokenContract(tokenContractAddress).transfer(
+                posterAddress,
+                tokenReward
+            );
         }
     }
 }
