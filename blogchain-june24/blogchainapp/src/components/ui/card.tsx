@@ -9,11 +9,14 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
+      "rounded-md border bg-card text-card-foreground shadow-lg",
       className
     )}
     style={{
-      maxWidth:'600px'
+      maxWidth:'500px',
+      minWidth: '500px',
+      borderRadius:'12px',
+      boxShadow: '5px 5px 0 rgba(255, 255, 255)'
     }}
     {...props}
   />
@@ -55,7 +58,7 @@ const CardDescription = React.forwardRef<
     ref={ref}
     className={cn("text-sm text-muted-foreground", className)}
     style={{
-      maxWidth: '600px',
+      maxWidth: '700px',
       whiteSpace: 'normal',
       wordWrap:"break-word"
     }}

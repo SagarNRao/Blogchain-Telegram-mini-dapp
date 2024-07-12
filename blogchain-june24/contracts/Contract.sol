@@ -11,10 +11,24 @@ contract MyValContract {
     event Deletepost(uint postId, bool isDeleted);
 
     address public tokenaddress;
+    address public owner;
     mapping(uint => uint) public postRewards;
 
     constructor() {
+        owner = msg.sender;
         tokenaddress = address(new MyTokenContract());
+    }
+    
+    modifier onlyowner(){
+        require(msg.sender == owner, "Unauthorized");
+        _;
+    }
+
+    // yes ive added a little bit of account creation and manipulation but they make no difference as of now
+
+    struct account{
+        address username;
+        bool isExpert;
     }
 
     struct post {
@@ -28,6 +42,7 @@ contract MyValContract {
     }
 
     post[] private posts;
+    account[] private accounts;
 
     // Mapping of post id to the wallet address of the user
     mapping(uint256 => address) postToOwner;
@@ -36,6 +51,9 @@ contract MyValContract {
     mapping(uint => uint) public approvals;
     event PostApproved(uint postId, address approver);
     event Validatepost(uint postId, bool isVerified);
+
+    //mapping of address to account
+    mapping(address => account) public userAccs;
 
     // Method to be called by our frontend when trying to add a new post
     function addpost(string memory postText, bool isDeleted) external {
@@ -99,5 +117,25 @@ contract MyValContract {
                 tokenReward
             );
         }
+    }
+
+    // ---------------------------------------------
+    // account manipulation
+
+    function createAccount(bool isExpert) external{
+        userAccs[msg.sender] = account({
+            username: msg.sender,
+            isExpert: true // will be set to true for testing purposes
+        });
+        accounts.push(userAccs[msg.sender]);
+    }
+
+    function ascention(address new_expert) onlyowner() {
+        require(msg.sender == owner, "Unauthorized");
+        userAccs[user].isExpert = isExpert;
+    }
+
+    function isExpertcheck(address user) external {
+        return userAccs[user].isExpert;
     }
 }

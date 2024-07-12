@@ -6,7 +6,7 @@ export const client = createThirdwebClient({
 });
 
 export const chain = defineChain(11155111);
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 
 const abi = [
   {

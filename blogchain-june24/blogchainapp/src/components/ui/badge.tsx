@@ -29,7 +29,9 @@ export interface BadgeProps
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div className={cn(badgeVariants({ variant }), className)} {...props} style={{
+      boxShadow: '2px 2px 0 rgba(255, 255, 255)'
+    }} />
   )
 }
 

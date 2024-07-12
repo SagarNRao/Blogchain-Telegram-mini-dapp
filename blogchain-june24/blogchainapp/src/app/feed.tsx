@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardTitle,
@@ -275,13 +276,13 @@ const contractABI = {
   deployedLinkReferences: {},
   networks: {
     "11155111": {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
       transactionHash:
-        "0x6ab2bb2afdbebc699ed96de5073682b79977721b8bdcd472602bfbcf660dc210",
+        "0xacf07a44450ef0de7711db735184a59a0e7d3776ee5412b08072d4474f2bcba3",
     },
   },
 };
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 
 // ------------------------------------------------------------------
 
@@ -613,13 +614,13 @@ const tokenABI = {
   networks: {
     // replace the address and the hash
     "11155111": {
-      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      address: "0xacf07a44450ef0de7711db735184a59a0e7d3776ee5412b08072d4474f2bcba3",
       transactionHash:
-        "0x131c81367dde6425b955ab1fcd2f6ff59769f45375b0a38e5f4ee474710fdd8f",
+        "0xacf07a44450ef0de7711db735184a59a0e7d3776ee5412b08072d4474f2bcba3",
     },
   },
 };
-const tokenAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const tokenAddress = "0xacf07a44450ef0de7711db735184a59a0e7d3776ee5412b08072d4474f2bcba3";
 
 const ContractDataFetcher: React.FC = () => {
   const [data, setData] = useState<any>(null);
@@ -666,7 +667,7 @@ const ContractDataFetcher: React.FC = () => {
       const contract = new ethers.Contract(tokenAddress, tokenABI.abi, signer);
 
       const tx = await contract.validatepost(postId);
-      console.log("validated")
+      console.log("validated");
     } catch (error) {
       console.log(error);
     }
@@ -674,7 +675,8 @@ const ContractDataFetcher: React.FC = () => {
 
   const postids: string[] = [];
   const addresses: string[] = [];
-  const postsarr: { content: string; isVerified: boolean, postId: string }[] = [];
+  const postsarr: { content: string; isVerified: boolean; postId: string }[] =
+    [];
 
   if (data) {
     data.forEach((item: any) => {
@@ -687,27 +689,34 @@ const ContractDataFetcher: React.FC = () => {
   if (!data) return <p>No data found</p>;
 
   return (
-    <div id="re">
-      {postsarr.map((post, index) => (
-        <Card key={index}>
-          <CardTitle className="p-5 pb-1">
-            post
-            <div className="p-1"></div>
-            {post.isVerified && <Badge>Verified</Badge>}
-            {!post.isVerified && <Badge>Not Verified</Badge>}
-          </CardTitle>
-          <CardDescription className="p-5">
-            {post.content}
-            <div className="p-1"></div>
-          </CardDescription>
-          <CardFooter>
-            <Button>Approve</Button>
-            <div className="p-1"></div>
-            <Button onClick={()=>handleverify(post.postId)}>Verify</Button>
-          </CardFooter>
-        </Card>
-      ))}
-    </div>
+    <>
+      <div id="re">
+        {postsarr.map((post, index) => (
+          <Card key={index} className="mb-4">
+            <CardTitle className="p-5 pb-1">
+              <div className="flex justify-between items-center">
+                Post Title
+                {post.isVerified && <Badge>Verified</Badge>}
+                {!post.isVerified && <Badge>Not Verified</Badge>}
+              </div>
+              <div className="p-2"></div>
+              <hr className="ml-[-1.3rem] mr-[-1.3rem]"></hr>
+            </CardTitle>
+            <CardDescription className="p-5">
+              {post.content}
+              <div className="p-1"></div>
+            </CardDescription>
+            <hr></hr>
+            <div className="p-2.5"></div>
+            <CardFooter>
+              <Button>Approve</Button>
+              <div className="p-1"></div>
+              <Button onClick={() => handleverify(post.postId)}>Verify</Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+    </>
   );
 };
 

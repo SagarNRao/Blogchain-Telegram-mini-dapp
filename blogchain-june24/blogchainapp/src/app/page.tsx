@@ -5,10 +5,7 @@ import ContractDataFetcher from "./feed";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuTrigger,
   NavigationMenuList,
-  NavigationMenuContent,
-  NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
@@ -18,16 +15,11 @@ import NewPostForm from "../../components/createpost";
 import Web3 from "web3";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
-import type { AppProps } from "next/app";
 import React from "react";
 import { useState, useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ResolvedRegister, WagmiProvider } from "wagmi";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-
-import { config } from "./wagmi";
-import MyValContract from "./../../../artifacts-zk/contracts/Contract.sol/MyValContract.json";
+import { QueryClient } from "@tanstack/react-query";
+import localfont from "next/font/local"
+import path from "path";
 
 interface Props {
   postId: string;
