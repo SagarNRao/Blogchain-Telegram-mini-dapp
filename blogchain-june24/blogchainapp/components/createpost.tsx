@@ -417,7 +417,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ web3, account }) => {
   
       await window.ethereum.request({ method: 'eth_requestAccounts' });
   
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await provider.listAccounts();
       if (accounts.length === 0) {
         throw new Error("No accounts found");
       }
@@ -428,12 +428,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ web3, account }) => {
   
       const signerAddress = await signer.getAddress();
       console.log("Signer Address:", signerAddress);
-  
-      // Log the contract address for debugging
-      // const contractAddress = "0x62A71C820A229c38C9fc40a8DC71971EA1B7A034";
+
       console.log("Contract Address:", contractAddress);
-  
-      
   
       const content = postText;
       const tx = await contract.addpost(content, false);

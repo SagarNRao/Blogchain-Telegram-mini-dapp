@@ -5,8 +5,8 @@
 @font-face {
   font-family: 'YourFontName';
   src: url("./../assets/HATTEN.TTF") format('truetype');
-  font-weight: normal;
-  font-style: normal;
+  font-weight: lighter;
+  font-style: lighter;
 }
 
 @layer base {
@@ -37,7 +37,7 @@
     --background: 20 14.3% 4.1%;
     --foreground: 0 0% 95%;
     --card: 24 9.8% 10%;
-    --global-font: 'YourFontName', sans-serif;
+    --global-font: Inter, sans-serif;
     --popover-foreground: 0 0% 95%;
     --primary: 142.1 70.6% 45.3%;
     --primary-foreground: 144.9 80.4% 10%;

@@ -16,28 +16,8 @@ import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import localfont from "next/font/local";
-import path from "path";
-import { WalletConnectButton } from "../../components/ConnectWalletButton";
 import CreateAccount from "../../components/createAcc";
-import {
-  getDefaultConfig,
-  RainbowKitProvider,
-  lightTheme,
-  darkTheme,
-} from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  base,
-  sepolia,
-} from "wagmi/chains";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { config } from "./config";
-import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
+import { QueryClient } from "@tanstack/react-query";
 
 interface Props {
   postId: string;
@@ -62,10 +42,11 @@ export default function Home() {
               <Image src={logo.src} alt="" width={175} height={175} />
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <div style={{ width: "1000px" }}></div>
+              <div style={{ width: "800px" }}></div>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <CreateAccount/>
+            <NavigationMenuItem className="flex">
+              <w3m-button />
+              <CreateAccount />
             </NavigationMenuItem>
             <NavigationMenuItem>
               <div className="p-1"></div>

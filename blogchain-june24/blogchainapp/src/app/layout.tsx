@@ -22,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Web3ModalProvider initialState={initialState}>
-          <w3m-button />
           {children}
         </Web3ModalProvider>
       </body>
