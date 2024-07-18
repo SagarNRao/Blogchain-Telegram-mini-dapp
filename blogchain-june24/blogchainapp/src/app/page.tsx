@@ -1,6 +1,5 @@
 "use client";
 
-import { Login } from "../../components/login";
 import ContractDataFetcher from "./feed";
 import {
   NavigationMenu,
@@ -17,9 +16,28 @@ import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { QueryClient } from "@tanstack/react-query";
-import localfont from "next/font/local"
+import localfont from "next/font/local";
 import path from "path";
+import { WalletConnectButton } from "../../components/ConnectWalletButton";
+import CreateAccount from "../../components/createAcc";
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+  lightTheme,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
+import { WagmiProvider } from "wagmi";
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+  sepolia,
+} from "wagmi/chains";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { config } from "./config";
+import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from "wagmi";
 
 interface Props {
   postId: string;
@@ -47,7 +65,7 @@ export default function Home() {
               <div style={{ width: "1000px" }}></div>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Login />
+              <CreateAccount/>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <div className="p-1"></div>
@@ -69,7 +87,7 @@ export default function Home() {
             {isClient && <NewPostForm web3={new Web3()} account={""} />}
           </div>
           <div className="flex justify-center mb-20">
-            <ContractDataFetcher/>
+            <ContractDataFetcher />
           </div>
         </div>
       </main>

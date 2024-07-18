@@ -18,15 +18,23 @@ contract MyValContract {
         owner = msg.sender;
         tokenaddress = address(new MyTokenContract());
     }
-    
-    modifier onlyowner(){
+
+    modifier onlyowner() {
         require(msg.sender == owner, "Unauthorized");
+        _;
+    }
+
+    modifier onlyusers() {
+        require(
+            userAccs[msg.sender].username != address(0),
+            "You need an account to perform this action"
+        );
         _;
     }
 
     // yes ive added a little bit of account creation and manipulation but they make no difference as of now
 
-    struct account{
+    struct account {
         address username;
         bool isExpert;
     }
@@ -56,7 +64,10 @@ contract MyValContract {
     mapping(address => account) public userAccs;
 
     // Method to be called by our frontend when trying to add a new post
-    function addpost(string memory postText, bool isDeleted) external {
+    function addpost(
+        string memory postText,
+        bool isDeleted
+    ) external onlyusers {
         uint postId = posts.length;
         bool isVerified = false; // Declare the variable isVerified
         posts.push(
@@ -67,7 +78,7 @@ contract MyValContract {
     }
 
     // Method to get all the posts
-    function getAllposts() external view returns (post[] memory) {
+    function getfeed() external view returns (post[] memory) {
         post[] memory temporary = new post[](posts.length);
         uint counter = 0;
         for (uint i = 0; i < posts.length; i++) {
@@ -85,14 +96,14 @@ contract MyValContract {
     }
 
     // Function to like a post
-    function likePost(uint _postId) external {
+    function likePost(uint _postId) external onlyusers {
         likes[_postId]++;
 
         emit PostLiked(_postId, msg.sender);
     }
 
     // Function to approve a post
-    function expertapprove(uint _postId) external {
+    function expertapprove(uint _postId) external onlyusers {
         approvals[_postId]++;
         if (approvals[_postId] > 10) {
             posts[_postId].isVerified = true;
@@ -102,7 +113,7 @@ contract MyValContract {
     }
 
     // Function to validate a post
-    function validatepost(uint _postId) external {
+    function validatepost(uint _postId) external onlyusers {
         require(!posts[_postId].isVerified, "post already verified");
 
         if (approvals[_postId] > 10) {
@@ -112,17 +123,14 @@ contract MyValContract {
             address posterAddress = postToOwner[_postId];
             uint tokenReward = 100; // adjust the reward amount as needed
             postRewards[_postId] = tokenReward;
-            MyTokenContract(tokenaddress).transfer(
-                posterAddress,
-                tokenReward
-            );
+            MyTokenContract(tokenaddress).transfer(posterAddress, tokenReward);
         }
     }
 
     // ---------------------------------------------
     // account manipulation
 
-    function createAccount(bool isExpert) external{
+    function createAccount(bool isExpert) external {
         userAccs[msg.sender] = account({
             username: msg.sender,
             isExpert: true // will be set to true for testing purposes
@@ -130,12 +138,12 @@ contract MyValContract {
         accounts.push(userAccs[msg.sender]);
     }
 
-    function ascention(address new_expert) onlyowner() {
+    function ascention(address new_expert) public onlyowner {
         require(msg.sender == owner, "Unauthorized");
-        userAccs[user].isExpert = isExpert;
+        userAccs[new_expert].isExpert = true; // Assuming you want to set the new expert's isExpert to true
     }
 
-    function isExpertcheck(address user) external {
+    function isExpertcheck(address user) external view returns (bool) {
         return userAccs[user].isExpert;
     }
 }

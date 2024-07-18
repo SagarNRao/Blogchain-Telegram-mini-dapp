@@ -1,28 +1,33 @@
-const { ethers } = require("hardhat");
-
 async function main() {
-  const [deployer] = await ethers.getSigners();
+    // Ensure the Hardhat Runtime Environment is correctly imported
+    const hre = require("hardhat");
+    const ethers = hre.ethers;
 
-  console.log("Deploying contracts with the account:", deployer.address);
+    // Get the deployer's signer
+    const [deployer] = await ethers.getSigners();
 
-  const MyValContract = await ethers.getContractFactory("MyValContract");
-  const myValContract = await MyValContract.deploy();
-  await myValContract.deployed();
+    // Deploy your contract (replace with your actual contract factory)
+    const MyContract = await ethers.getContractFactory("MyValContract"); // Replace with your contract name
+    const myContract = await MyContract.deploy();
 
-  const TokenContract = await ethers.getContractFactory("MyTokenContract");
-  const tokenContract = await TokenContract.deploy();
-  await tokenContract.deployed();
+    const MyTokenContract = await ethers.getContractFactory("MyTokenContract"); // Replace with your contract name
+    const myTokenContract = await MyTokenContract.deploy();
 
-  console.log("MyValContract deployed to:", myValContract.address);
-  console.log("Transaction hash:", myValContract.deployTransaction.hash);
+    // Wait for deployment confirmation
+    await myContract.deployed();
+    await myTokenContract.deployed();
 
-  console.log("MyTokenContract deployed to:", tokenContract.address);
-  console.log("Transaction hash:", tokenContract.deployTransaction.hash);
+    console.log("MyValContract deployed at:", myContract.address);
+    console.log("MyValContract Transaction Hash: ", myContract.deployTransaction.hash);
+    console.log("")
+    console.log("MyTokenContract deployed at:", myTokenContract.address);
+    console.log("MyTokenContract Transaction Hash: ", myTokenContract.deployTransaction.hash);
+    console.log("Deployer's address:", deployer.address);
 }
 
 main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+    .then(() => process.exit(0))
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });

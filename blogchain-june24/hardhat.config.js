@@ -1,4 +1,5 @@
 require("@matterlabs/hardhat-zksync-solc");
+require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-waffle");
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -26,9 +27,16 @@ module.exports = {
       zksync: true,
     },
     local: {
-      url: 'http://127.0.0.1:8545', // URL of your local blockchain
-      accounts: ['0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'] // Optional: Array of account private keys to use for transactions not for deploying
-    }
+      url: "http://127.0.0.1:8545", // URL of your local blockchain
+      accounts: [
+        "0x6df83d5be7c0fc6f3d185c0544f7cc3ee0095dbf17ed834e486441f40b171baa",
+      ],
+      // Optional: Array of account private keys to use for transactions not for deploying
+    },
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/e84a2946755345209aa59f4a1645f14a`,
+      accounts: ["0x6df83d5be7c0fc6f3d185c0544f7cc3ee0095dbf17ed834e486441f40b171baa"],
+  }
   },
   paths: {
     artifacts: "./artifacts-zk",

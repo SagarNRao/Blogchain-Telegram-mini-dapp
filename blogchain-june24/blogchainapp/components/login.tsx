@@ -1,30 +1,23 @@
-"use client";
+"use client"
 
-import { chain, client } from "../utils/constants";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useActiveAccount } from "thirdweb/react";
+import * as React from 'react';
+import { useConnect } from 'wagmi';
 
-export const Login: React.FC = () => {
-  const account = useActiveAccount();
+export function ConnectWalletButton() {
+  const { connectors, connect } = useConnect();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {account ? (
-        <div style={{ textAlign: "center" }}>
-          <ConnectButton />
-        </div>
-      ) : (
-        <div style={{ textAlign: "center" }}>
-          <ConnectButton />
-        </div>
-      )}
+    <div>
+      <h2>Connect Wallet</h2>
+      <ul>
+        {connectors.map((connector) => (
+          <li key={connector.uid}>
+            <button onClick={() => connect({ connector })}>
+              {connector.name}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
