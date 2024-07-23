@@ -425,6 +425,7 @@ const ContractDataFetcher: React.FC = () => {
         contractABI,
         provider
       );
+      console.log(ethers.Contract.name);
 
       try {
         const result = await contract.getfeed();
@@ -433,6 +434,7 @@ const ContractDataFetcher: React.FC = () => {
         console.error("Error calling getfeed:", error);
       }
     } catch (error) {
+
       console.error("Failed to fetch contract data:", error);
     } finally {
       setLoading(false);
