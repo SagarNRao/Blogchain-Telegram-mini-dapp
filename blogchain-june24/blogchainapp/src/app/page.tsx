@@ -35,6 +35,7 @@ export default function Home() {
 
   return (
     <>
+      <h1>If you get user rejected request error use chrome</h1>
       <div className="flex h-100px items-center mx-auto p-2 outline outline-1 outline-gray-500">
         <NavigationMenu>
           <NavigationMenuList>
